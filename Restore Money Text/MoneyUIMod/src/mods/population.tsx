@@ -10,8 +10,8 @@ const formatMoneyDelta = (value: number) => {
 };
 
 // Main Component that incorporates original and custom logic
-const MoneyField: React.FC = () => {
-    const moneyDelta = useValue(toolbarBottom.moneyDelta$); // Adjust as per your actual API usage
+const PopField: React.FC = () => {
+    const popField = useValue(toolbarBottom.populationDelta$); // Adjust as per your actual API usage
 
     useEffect(() => {
 
@@ -19,29 +19,29 @@ const MoneyField: React.FC = () => {
         const trendElements = document.querySelectorAll('.trend_IAr');
         if (trendElements.length > 1) {
             // Select the second instance
-            const trendElement = trendElements[1];
+            const trendElement = trendElements[0];
 
             // Determine the class based on the moneyDelta value
-            const className = moneyDelta < 0 ? 'negative_Moc' : 'positive_n5t';
+            const className = popField < 0 ? 'negative_Moc' : 'positive_n5t';
 
             // Check if moneyDelta element already exists
-            let moneyDeltaElement = trendElement.nextElementSibling;
-            if (moneyDeltaElement && moneyDeltaElement.classList.contains('moneyDeltaDisplay')) {
+            let popDeltaElement = trendElement.nextElementSibling;
+            if (popDeltaElement && popDeltaElement.classList.contains('popDeltaDisplay')) {
                 // Update existing element
-                moneyDeltaElement.textContent = `${formatMoneyDelta(moneyDelta)} /h`;
-                moneyDeltaElement.className = `moneyDeltaDisplay ${className}`;
+                popDeltaElement.textContent = `${formatMoneyDelta(popField)} /h`;
+                popDeltaElement.className = `popDeltaDisplay ${className}`;
             } else {
                 // Create a span element for moneyDelta
-                moneyDeltaElement = document.createElement('span');
-                moneyDeltaElement.className = `moneyDeltaDisplay ${className}`;
-                moneyDeltaElement.textContent = `${formatMoneyDelta(moneyDelta)} /h`;
+                popDeltaElement = document.createElement('span');
+                popDeltaElement.className = `popDeltaDisplay ${className}`;
+                popDeltaElement.textContent = `${formatMoneyDelta(popField)} /h`;
                 // Append the moneyDelta element after the trend_IAr element
-                trendElement.insertAdjacentElement('afterend', moneyDeltaElement);
+                trendElement.insertAdjacentElement('afterend', popDeltaElement);
             }
         }
-    }, [moneyDelta]);
+    }, [popField]);
 
     return null; // No need to render anything within React, since we're manipulating the DOM directly
 };
 
-export default MoneyField;
+export default PopField;
